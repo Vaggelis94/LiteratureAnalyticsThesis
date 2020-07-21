@@ -1,20 +1,10 @@
 package LiteratureAnalytics.ui;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Scanner;
 import javax.swing.*;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 
 public class LiteratureAnalyticsUI extends javax.swing.JFrame {
 
@@ -157,59 +147,23 @@ public class LiteratureAnalyticsUI extends javax.swing.JFrame {
         File myfile = chooser.getSelectedFile();
         //Get the path of the file
         String filename = myfile.getAbsolutePath();
-        
+
         try {
             //JSoup parsing
             Document doc = Jsoup.parse(myfile, "UTF-8", " ");
-            //Get the headers
-            Elements h1 = doc.getElementsByTag("h1");
-            Elements h3 = doc.getElementsByTag("h3");
-            Elements h4 = doc.getElementsByTag("h4");
-            Elements h5 = doc.getElementsByTag("h5");
-            Elements h6 = doc.getElementsByTag("h6");
-            //Get the paragraphs
-            Elements paragraphs = doc.getElementsByTag("p");
-            //Get the body
-            Elements body = doc.getElementsByTag("body");
-            
-            for (Element h : h1) {
-                String h1Text = h.text();
-                TextArea.append(h1Text + "\n");
-            }
-            for (Element p : paragraphs) {
-                String pText = p.text();
-                TextArea.append(pText + "\n");
-            }
-            for (Element h : h4) {
-                String h4Text = h.text();
-                TextArea.append(h4Text + "\n");
-            }
-            TextArea.requestFocus();
-            //String Text = doc.body().text();
-            //TextArea.append(Text + "\n");
-            //TextArea.requestFocus();
-            
-            /*
-            for (Element h : h3) {
-                String h3Text = h.text();
-                TextArea.append(h3Text + "\n");
-            }
-             
-            }
-            
-            FileReader reader = new FileReader(filename);
-            BufferedReader br = new BufferedReader(reader);
-            TextArea.read(br, null);
-            br.close();
-            */ 
-        }
-        catch (IOException e) {
+            String processedText = doc.html();
+            //Remove CSS style
+            processedText = processedText.replaceAll("<style([\\s\\S]+?)</style>", "");
+            //Remove the rest of the html tags
+            processedText = processedText.replaceAll("<[^>]*>", "");
+            TextArea.append(processedText);
+        } catch (IOException e) {
             JOptionPane.showMessageDialog(null, e);
-        }   
+        }
     }//GEN-LAST:event_InputTextButtonActionPerformed
-  
+
     public static void main(String args[]) throws IOException {
-         
+
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
