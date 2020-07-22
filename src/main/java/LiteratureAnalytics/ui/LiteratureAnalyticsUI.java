@@ -5,6 +5,8 @@ import java.io.IOException;
 import javax.swing.*;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 public class LiteratureAnalyticsUI extends javax.swing.JFrame {
 
@@ -149,16 +151,27 @@ public class LiteratureAnalyticsUI extends javax.swing.JFrame {
         String filename = myfile.getAbsolutePath();
 
         try {
-            //JSoup parsing
+            //JSoup parsing 
             Document doc = Jsoup.parse(myfile, "UTF-8", " ");
+            doc.select("h1").attr("font-size", "185%");
             String processedText = doc.html();
+
+            //Remove the <head> tag
+            processedText = processedText.replaceAll("<head([\\s\\S]+?)</head>", "");
+            //Remove the <div> tags
+            processedText = processedText.replaceAll("<div([\\s\\S]+?)</div>", "");
             //Remove CSS style
             processedText = processedText.replaceAll("<style([\\s\\S]+?)</style>", "");
             //Remove the rest of the html tags
             processedText = processedText.replaceAll("<[^>]*>", "");
+            //Remove the &nbsp; characters
+            processedText = processedText.replaceAll("&nbsp;", "");
+            //Remove blank lines
+            processedText = processedText.trim();
+            
             TextArea.append(processedText);
         } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, e);
+            //JOptionPane.showMessageDialog(null, e);
         }
     }//GEN-LAST:event_InputTextButtonActionPerformed
 
