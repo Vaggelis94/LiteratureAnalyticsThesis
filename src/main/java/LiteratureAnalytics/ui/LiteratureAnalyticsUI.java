@@ -1,11 +1,13 @@
 package LiteratureAnalytics.ui;
 
+import java.awt.Font;
 import java.io.File;
 import java.io.IOException;
 import javax.swing.*;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 public class LiteratureAnalyticsUI extends javax.swing.JFrame {
@@ -33,8 +35,8 @@ public class LiteratureAnalyticsUI extends javax.swing.JFrame {
         WordAnalysisButton = new javax.swing.JButton();
         SentenceAnalysisButton = new javax.swing.JButton();
         RightPanel = new javax.swing.JPanel();
-        ScrollPane = new javax.swing.JScrollPane();
-        TextArea = new javax.swing.JTextArea();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        TextPane = new javax.swing.JTextPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -56,7 +58,7 @@ public class LiteratureAnalyticsUI extends javax.swing.JFrame {
             .addGroup(TopPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(InputTextButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(428, Short.MAX_VALUE))
         );
         TopPanelLayout.setVerticalGroup(
             TopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -97,25 +99,17 @@ public class LiteratureAnalyticsUI extends javax.swing.JFrame {
                 .addContainerGap(155, Short.MAX_VALUE))
         );
 
-        TextArea.setColumns(20);
-        TextArea.setLineWrap(true);
-        TextArea.setRows(5);
-        TextArea.setWrapStyleWord(true);
-        ScrollPane.setViewportView(TextArea);
+        jScrollPane1.setViewportView(TextPane);
 
         javax.swing.GroupLayout RightPanelLayout = new javax.swing.GroupLayout(RightPanel);
         RightPanel.setLayout(RightPanelLayout);
         RightPanelLayout.setHorizontalGroup(
             RightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(RightPanelLayout.createSequentialGroup()
-                .addComponent(ScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jScrollPane1)
         );
         RightPanelLayout.setVerticalGroup(
             RightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(RightPanelLayout.createSequentialGroup()
-                .addComponent(ScrollPane)
-                .addContainerGap())
+            .addComponent(jScrollPane1)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -153,23 +147,40 @@ public class LiteratureAnalyticsUI extends javax.swing.JFrame {
         try {
             //JSoup parsing 
             Document doc = Jsoup.parse(myfile, "UTF-8", " ");
-            doc.select("h1").attr("font-size", "185%");
             String processedText = doc.html();
+
+            //Get <h1> headers
+            Elements headers = doc.getElementsByTag("h1");
+            String header1Text = headers.text();
+
+            //Set style Bold
+            if (processedText.contains(header1Text)) {
+                SimpleAttributeSet attributeSet = new SimpleAttributeSet();
+                StyleConstants.setBold(attributeSet, true);
+                TextPane.setCharacterAttributes(attributeSet, true);
+                //TextPane.setText(header1Text);
+            }
 
             //Remove the <head> tag
             processedText = processedText.replaceAll("<head([\\s\\S]+?)</head>", "");
-            //Remove the <div> tags
-            processedText = processedText.replaceAll("<div([\\s\\S]+?)</div>", "");
+            //Remove the <title> tag
+            processedText = processedText.replaceAll("<title([\\s\\S]+?)</title>", "");
+            //Remove the <pre> tags
+            processedText = processedText.replaceAll("<pre([\\s\\S]+?)</pre>", "");
             //Remove CSS style
             processedText = processedText.replaceAll("<style([\\s\\S]+?)</style>", "");
+            //New line after each header
+            processedText = processedText.replaceAll("<[/]h.>", "\n");
+            //New line after each paragraph
+            processedText = processedText.replaceAll("</p>", "\n");
             //Remove the rest of the html tags
             processedText = processedText.replaceAll("<[^>]*>", "");
             //Remove the &nbsp; characters
             processedText = processedText.replaceAll("&nbsp;", "");
             //Remove blank lines
             processedText = processedText.trim();
-            
-            TextArea.append(processedText);
+
+            TextPane.setText(processedText);
         } catch (IOException e) {
             //JOptionPane.showMessageDialog(null, e);
         }
@@ -213,10 +224,10 @@ public class LiteratureAnalyticsUI extends javax.swing.JFrame {
     private javax.swing.JButton InputTextButton;
     private javax.swing.JPanel LeftPanel;
     private javax.swing.JPanel RightPanel;
-    private javax.swing.JScrollPane ScrollPane;
     private javax.swing.JButton SentenceAnalysisButton;
-    private javax.swing.JTextArea TextArea;
+    private javax.swing.JTextPane TextPane;
     private javax.swing.JPanel TopPanel;
     private javax.swing.JButton WordAnalysisButton;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
