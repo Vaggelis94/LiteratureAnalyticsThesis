@@ -1,73 +1,61 @@
 package LiteratureAnalytics.utility;
 
+import LiteratureAnalytics.vocab.Vocabulary;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class CharacterAnalysis {
 
-    private String text;
-    private int LettersCount = 0;
+    private Vocabulary vocab;
+
+    private int lettersCount = 0;
     private int digitsCount = 0;
     private int spaceCount = 0;
     private int othersCount = 0;
+
     private float lettersPercentage;
     private float digitsPercentage;
     private float spacePercentage;
     private float othersPercentage;
 
-    public CharacterAnalysis(String text) {
-        this.text = text;
+    public CharacterAnalysis(Vocabulary vocab) {
+        this.vocab = vocab;
     }
 
     @Override
     public String toString() {
-        return LettersCount + " \t" + digitsCount + " \t" + spaceCount + " \t" + othersCount;
+        return "Αριθμός Γραμμάτων: " + lettersCount + " ~ (" + lettersPercentage + " %)" + "\n" +
+                "\n Αριθμός Ψηφίων: " + digitsCount + " ~ (" + digitsPercentage + " %)" + "\n" +
+                "\n Αριθμός Κενών Χαρακτήρων: " + spaceCount + " ~ (" + spacePercentage + " %)" + "\n" +
+                "\n Αριθμός Υπόλοιπων Χαρακτήρων: " + othersCount + " ~ (" + othersPercentage + " %)";
     }
 
-    public void Analysis() {
-        char c;
+    public void analysis() {
         float sum = 0;
+        HashMap<Character, Integer> map = vocab.getCharacterCount();
 
-        //Analyze character by character
-        for (int i = 0; i < text.length(); i++) {
-            //Get the next character
-            c = text.charAt(i);
+        for (Map.Entry<Character, Integer> entry : map.entrySet())
+            sum += entry.getValue();
 
-            //Verify english letter
-            if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z')) {
-                LettersCount++;
-                sum++;
-            } //Verify greek letter
-            else if ((c >= 'Α' && c <= 'Ω') || (c >= 'α' && c <= 'ω')) {
-                LettersCount++;
-                sum++;
-            } //Verify number
-            else if (c >= '0' && c <= '9') {
-                digitsCount++;
-                sum++;
-            } //Verify space character
-            else if (c == '\t' || c == ' ' || c == '\n') {
-                spaceCount++;
-                sum++;
-            } else {
-                othersCount++;
-                sum++;
-            }
-        }
-        lettersPercentage = (LettersCount / sum) * 100;
+        for (char c = 'A'; c < 'Z'; c++)
+            lettersCount += map.getOrDefault(c, 0);
+        for (char c = 'a'; c < 'z'; c++)
+            lettersCount += map.getOrDefault(c, 0);
+        lettersCount += map.getOrDefault('Ά', 0);
+        for (char c = 'Έ'; c < 'ώ'; c++)
+            lettersCount += map.getOrDefault(c, 0);
+
+        for (char c = '0'; c < '9'; c++)
+            digitsCount += map.getOrDefault(c, 0);
+
+        spaceCount = map.getOrDefault(' ', 0);
+
+        othersCount = (int) (sum - lettersCount - digitsCount - spaceCount);
+
+        lettersPercentage = (lettersCount / sum) * 100;
         digitsPercentage = (digitsCount / sum) * 100;
         spacePercentage = (spaceCount / sum) * 100;
         othersPercentage = (othersCount / sum) * 100;
-
     }
-
-    public String[] displayAnalysis() {
-
-        //Insert results inside array
-        String[] myCharacters = new String[4];
-        myCharacters[0] = ("Αριθμός Γραμμάτων: " + LettersCount + " ~ (" + lettersPercentage + " %)");
-        myCharacters[1] = ("\n Αριθμός Ψηφίων: " + digitsCount + " ~ (" + digitsPercentage + " %)");
-        myCharacters[2] = ("\n Αριθμός Κενών Χαρακτήρων: " + spaceCount + " ~ (" + spacePercentage + " %)");
-        myCharacters[3] = ("\n Αριθμός Υπόλοιπων Χαρακτήρων: " + othersCount + " ~ (" + othersPercentage + " %)");
-        return myCharacters;
-
-    }
-
 }

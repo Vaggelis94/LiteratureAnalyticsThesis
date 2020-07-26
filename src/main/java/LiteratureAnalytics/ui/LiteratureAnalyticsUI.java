@@ -2,6 +2,7 @@ package LiteratureAnalytics.ui;
 
 import LiteratureAnalytics.utility.CharacterAnalysis;
 import LiteratureAnalytics.utility.WordAnalysis;
+import LiteratureAnalytics.vocab.Vocabulary;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
@@ -11,6 +12,8 @@ import java.io.IOException;
 import java.util.Arrays;
 
 public class LiteratureAnalyticsUI extends javax.swing.JFrame {
+
+    Vocabulary vocab;
 
     /**
      * Creates new form LiteratureAnalyticsUI
@@ -54,17 +57,17 @@ public class LiteratureAnalyticsUI extends javax.swing.JFrame {
         javax.swing.GroupLayout TopPanelLayout = new javax.swing.GroupLayout(TopPanel);
         TopPanel.setLayout(TopPanelLayout);
         TopPanelLayout.setHorizontalGroup(
-            TopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(TopPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(InputTextButton)
-                .addContainerGap(428, Short.MAX_VALUE))
+                TopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(TopPanelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(InputTextButton)
+                                .addContainerGap(428, Short.MAX_VALUE))
         );
         TopPanelLayout.setVerticalGroup(
-            TopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TopPanelLayout.createSequentialGroup()
-                .addComponent(InputTextButton, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
-                .addContainerGap())
+                TopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TopPanelLayout.createSequentialGroup()
+                                .addComponent(InputTextButton, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                                .addContainerGap())
         );
 
         LeftPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Επιλογή Ανάλυσης", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
@@ -99,21 +102,21 @@ public class LiteratureAnalyticsUI extends javax.swing.JFrame {
         javax.swing.GroupLayout LeftPanelLayout = new javax.swing.GroupLayout(LeftPanel);
         LeftPanel.setLayout(LeftPanelLayout);
         LeftPanelLayout.setHorizontalGroup(
-            LeftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(CharacterAnalysisButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(WordAnalysisButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(SentenceAnalysisButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                LeftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(CharacterAnalysisButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(WordAnalysisButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(SentenceAnalysisButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         LeftPanelLayout.setVerticalGroup(
-            LeftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(LeftPanelLayout.createSequentialGroup()
-                .addGap(43, 43, 43)
-                .addComponent(CharacterAnalysisButton)
-                .addGap(43, 43, 43)
-                .addComponent(WordAnalysisButton)
-                .addGap(43, 43, 43)
-                .addComponent(SentenceAnalysisButton)
-                .addContainerGap(82, Short.MAX_VALUE))
+                LeftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(LeftPanelLayout.createSequentialGroup()
+                                .addGap(43, 43, 43)
+                                .addComponent(CharacterAnalysisButton)
+                                .addGap(43, 43, 43)
+                                .addComponent(WordAnalysisButton)
+                                .addGap(43, 43, 43)
+                                .addComponent(SentenceAnalysisButton)
+                                .addContainerGap(82, Short.MAX_VALUE))
         );
 
         TextPane.setEditable(false);
@@ -122,33 +125,33 @@ public class LiteratureAnalyticsUI extends javax.swing.JFrame {
         javax.swing.GroupLayout RightPanelLayout = new javax.swing.GroupLayout(RightPanel);
         RightPanel.setLayout(RightPanelLayout);
         RightPanelLayout.setHorizontalGroup(
-            RightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(ScrollPane)
+                RightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(ScrollPane)
         );
         RightPanelLayout.setVerticalGroup(
-            RightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(ScrollPane)
+                RightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(ScrollPane)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(TopPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(LeftPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(RightPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(TopPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(LeftPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(RightPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(TopPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(LeftPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(RightPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addComponent(TopPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(LeftPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(RightPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         pack();
@@ -164,9 +167,10 @@ public class LiteratureAnalyticsUI extends javax.swing.JFrame {
         try {
             // TODO: Replace with regular parsing, there is no apparent need for JSoup
             Document doc = Jsoup.parse(myFile, "UTF-8", " ");
-            TextPane.setText(
-                    parseDocument(doc.html())
-            );
+
+            String documentText = parseDocument(doc.html());
+            TextPane.setText(documentText);
+            vocab = new Vocabulary(documentText);
         } catch (IOException e) {
             //JOptionPane.showMessageDialog(null, e);
         }
@@ -206,39 +210,31 @@ public class LiteratureAnalyticsUI extends javax.swing.JFrame {
         if (TextPane.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Το κείμενο είναι άδειο!", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
         } else {
-            // Create a new CharacterAnalysis Object
-            CharacterAnalysis charAnalysis = new CharacterAnalysis(text);
-            // Do the analysis
-            charAnalysis.Analysis();
+            CharacterAnalysis charAnalysis = new CharacterAnalysis(vocab);
+            charAnalysis.analysis();
 
-            //Show results
             JOptionPane.showMessageDialog(null, "Ο συνολικός αριθμός Χαρακτήρων του κειμένου είναι: \n"
                     + text.length(), messageTitle, JOptionPane.INFORMATION_MESSAGE);
 
             JOptionPane.showMessageDialog(null, "Κατηγορίες Χαρακτήρων: \n \n"
-                    + Arrays.toString(charAnalysis.displayAnalysis()), messageTitle, JOptionPane.INFORMATION_MESSAGE);
+                    + charAnalysis, messageTitle, JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
     private void WordAnalysisButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_WordAnalysisButtonActionPerformed
         String messageTitle = "Ανάλυση Λέξεων";
-        String text = TextPane.getText();
 
         if (TextPane.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Το κείμενο είναι άδειο!", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
         } else {
-            //Create a new WordAnalysis Object
-            WordAnalysis wordAnalysis = new WordAnalysis(text);
-            // Do the analysis
-            wordAnalysis.splitWords();
-            wordAnalysis.WordRateAnalysis();
+            WordAnalysis wordAnalysis = new WordAnalysis(vocab);
+            wordAnalysis.analysis();
 
-            //Show results
             JOptionPane.showMessageDialog(null, "Οι συνολικός αριθμός Λέξεων του κειμένου είναι: \n"
-                    + wordAnalysis.splitWords().length, messageTitle, JOptionPane.INFORMATION_MESSAGE);
+                    + wordAnalysis, messageTitle, JOptionPane.INFORMATION_MESSAGE);
 
             JOptionPane.showMessageDialog(null, "Οι Λέξεις του κειμένου είναι: \n"
-                    + Arrays.toString(wordAnalysis.splitWords()), messageTitle, JOptionPane.INFORMATION_MESSAGE);
+                    + wordAnalysis, messageTitle, JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
@@ -258,7 +254,7 @@ public class LiteratureAnalyticsUI extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
