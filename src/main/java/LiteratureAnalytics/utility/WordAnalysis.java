@@ -1,4 +1,4 @@
-package LiteratureAnalytics.ui;
+package LiteratureAnalytics.utility;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -10,22 +10,11 @@ public class WordAnalysis {
     ArrayList<String> words = new ArrayList<String>();
     ArrayList<Integer> count = new ArrayList<Integer>();
 
-    //Getter
-    public String getText() {
-        return text;
-    }
-
-    //Setter
-    public void setText(String text) {
+    public WordAnalysis(String text) {
         this.text = text;
     }
 
-    public void readText(String text) {
-        Scanner input = new Scanner(System.in);
-        text = input.nextLine();
-    }
-
-    public String[] SplitWords() {
+    public String[] splitWords() {
         String word[];
 
         //Replace all non-word characters

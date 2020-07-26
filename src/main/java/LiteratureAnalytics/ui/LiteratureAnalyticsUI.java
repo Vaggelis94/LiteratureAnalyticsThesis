@@ -1,16 +1,14 @@
 package LiteratureAnalytics.ui;
 
-import java.awt.Font;
+import LiteratureAnalytics.utility.CharacterAnalysis;
+import LiteratureAnalytics.utility.WordAnalysis;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+
+import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
-import javax.swing.text.SimpleAttributeSet;
-import javax.swing.text.StyleConstants;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.select.Elements;
 
 public class LiteratureAnalyticsUI extends javax.swing.JFrame {
 
@@ -157,118 +155,103 @@ public class LiteratureAnalyticsUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void InputTextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InputTextButtonActionPerformed
-        //Create a File Chooser to open the file
+
+        // File loading
         JFileChooser chooser = new JFileChooser();
         chooser.showOpenDialog(null);
-        File myfile = chooser.getSelectedFile();
-        //Get the path of the file
-        String filename = myfile.getAbsolutePath();
+        File myFile = chooser.getSelectedFile();
 
         try {
-            //JSoup parsing 
-            Document doc = Jsoup.parse(myfile, "UTF-8", " ");
-            String processedText = doc.html();
-
-            //Get <h1> headers
-            Elements headers = doc.getElementsByTag("h1");
-            String header1Text = headers.text();
-
-            //Set style Bold
-            if (processedText.contains(header1Text)) {
-                SimpleAttributeSet attributeSet = new SimpleAttributeSet();
-                StyleConstants.setBold(attributeSet, true);
-                TextPane.setCharacterAttributes(attributeSet, true);
-                //TextPane.setText(header1Text);
-            }
-
-            //Remove the <head> tag
-            processedText = processedText.replaceAll("<head([\\s\\S]+?)</head>", "");
-            //Remove the <title> tag
-            processedText = processedText.replaceAll("<title([\\s\\S]+?)</title>", "");
-            //Remove the <pre> tags
-            processedText = processedText.replaceAll("<pre([\\s\\S]+?)</pre>", "");
-            //Remove CSS style
-            processedText = processedText.replaceAll("<style([\\s\\S]+?)</style>", "");
-            //New line after each header
-            processedText = processedText.replaceAll("<[/]h.>", "\n");
-            //New line after each paragraph
-            processedText = processedText.replaceAll("</p>", "\n");
-            //Remove the rest of the html tags
-            processedText = processedText.replaceAll("<[^>]*>", "");
-            //Remove the &nbsp; characters
-            processedText = processedText.replaceAll("&nbsp;", "");
-            //Remove the &amp; characters
-            processedText = processedText.replaceAll("&amp;", "");
-            //Remove blank lines
-            processedText = processedText.trim();
-
-            TextPane.setText(processedText);
+            // TODO: Replace with regular parsing, there is no apparent need for JSoup
+            Document doc = Jsoup.parse(myFile, "UTF-8", " ");
+            TextPane.setText(
+                    parseDocument(doc.html())
+            );
         } catch (IOException e) {
             //JOptionPane.showMessageDialog(null, e);
         }
-    }//GEN-LAST:event_InputTextButtonActionPerformed
+    }
+
+    private String parseDocument(String text) {
+        String processedText = text;
+
+        //Remove the <head> tag
+        processedText = processedText.replaceAll("<head([\\s\\S]+?)</head>", "");
+        //Remove the <title> tag
+        processedText = processedText.replaceAll("<title([\\s\\S]+?)</title>", "");
+        //Remove the <pre> tags
+        processedText = processedText.replaceAll("<pre([\\s\\S]+?)</pre>", "");
+        //Remove CSS style
+        processedText = processedText.replaceAll("<style([\\s\\S]+?)</style>", "");
+        //New line after each header
+        processedText = processedText.replaceAll("<[/]h.>", "\n");
+        //New line after each paragraph
+        processedText = processedText.replaceAll("</p>", "\n");
+        //Remove the rest of the html tags
+        processedText = processedText.replaceAll("<[^>]*>", "");
+        //Remove the &nbsp; characters
+        processedText = processedText.replaceAll("&nbsp;", "");
+        //Remove the &amp; characters
+        processedText = processedText.replaceAll("&amp;", "");
+        //Remove blank lines
+        processedText = processedText.trim();
+
+        return processedText;
+    }
 
     private void CharacterAnalysisButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CharacterAnalysisButtonActionPerformed
-        //Set Title of Infobox
-        String titlebar = "Ανάλυση Χαρακτήρων";
-        //Get the text from TextPane
-        String characters = TextPane.getText();
+        String messageTitle = "Ανάλυση Χαρακτήρων";
+        String text = TextPane.getText();
 
         if (TextPane.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Το κείμενο είναι άδειο!", "ERROR", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Το κείμενο είναι άδειο!", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
         } else {
-            //Create a new CharacterAnalysis Object
-            CharacterAnalysis charAnalysis = new CharacterAnalysis();
-            //Call the proper CharacterAnalysis methods
-            charAnalysis.setText(characters);
+            // Create a new CharacterAnalysis Object
+            CharacterAnalysis charAnalysis = new CharacterAnalysis(text);
+            // Do the analysis
             charAnalysis.Analysis();
 
             //Show results
             JOptionPane.showMessageDialog(null, "Ο συνολικός αριθμός Χαρακτήρων του κειμένου είναι: \n"
-                    + characters.length(), titlebar, JOptionPane.INFORMATION_MESSAGE);
+                    + text.length(), messageTitle, JOptionPane.INFORMATION_MESSAGE);
 
             JOptionPane.showMessageDialog(null, "Κατηγορίες Χαρακτήρων: \n \n"
-                    + Arrays.toString(charAnalysis.displayAnalysis()), titlebar, JOptionPane.INFORMATION_MESSAGE);
+                    + Arrays.toString(charAnalysis.displayAnalysis()), messageTitle, JOptionPane.INFORMATION_MESSAGE);
         }
-    }//GEN-LAST:event_CharacterAnalysisButtonActionPerformed
+    }
 
     private void WordAnalysisButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_WordAnalysisButtonActionPerformed
-        //Set Title of Infobox
-        String titlebar = "Ανάλυση Λέξεων";
-        //Get the text from TextPane
-        String words = TextPane.getText();
+        String messageTitle = "Ανάλυση Λέξεων";
+        String text = TextPane.getText();
 
         if (TextPane.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Το κείμενο είναι άδειο!", "ERROR", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Το κείμενο είναι άδειο!", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
         } else {
             //Create a new WordAnalysis Object
-            WordAnalysis wordAnalysis = new WordAnalysis();
-            //Call the proper WordAnalysis methods
-            wordAnalysis.setText(words);
-            wordAnalysis.SplitWords();
+            WordAnalysis wordAnalysis = new WordAnalysis(text);
+            // Do the analysis
+            wordAnalysis.splitWords();
             wordAnalysis.WordRateAnalysis();
 
             //Show results
             JOptionPane.showMessageDialog(null, "Οι συνολικός αριθμός Λέξεων του κειμένου είναι: \n"
-                    + wordAnalysis.SplitWords().length, titlebar, JOptionPane.INFORMATION_MESSAGE);
+                    + wordAnalysis.splitWords().length, messageTitle, JOptionPane.INFORMATION_MESSAGE);
 
             JOptionPane.showMessageDialog(null, "Οι Λέξεις του κειμένου είναι: \n"
-                    + Arrays.toString(wordAnalysis.SplitWords()), titlebar, JOptionPane.INFORMATION_MESSAGE);
+                    + Arrays.toString(wordAnalysis.splitWords()), messageTitle, JOptionPane.INFORMATION_MESSAGE);
         }
-    }//GEN-LAST:event_WordAnalysisButtonActionPerformed
+    }
 
     private void SentenceAnalysisButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SentenceAnalysisButtonActionPerformed
-        //Set Title of Infobox
-        String titlebar = "Ανάλυση Προτάσεων";
-        //Get the text from TextPane
-        String sentences = TextPane.getText();
+        String messageTitle = "Ανάλυση Προτάσεων";
+        String text = TextPane.getText();
 
         if (TextPane.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Το κείμενο είναι άδειο!", "ERROR", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Το κείμενο είναι άδειο!", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
         } else {
 
         }
-    }//GEN-LAST:event_SentenceAnalysisButtonActionPerformed
+    }
 
     public static void main(String args[]) throws IOException {
 
