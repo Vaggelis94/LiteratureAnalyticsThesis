@@ -3,7 +3,9 @@ package LiteratureAnalytics.ui;
 import java.awt.Font;
 import java.io.File;
 import java.io.IOException;
-import javax.swing.*;
+import java.util.Arrays;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import org.jsoup.Jsoup;
@@ -35,12 +37,12 @@ public class LiteratureAnalyticsUI extends javax.swing.JFrame {
         WordAnalysisButton = new javax.swing.JButton();
         SentenceAnalysisButton = new javax.swing.JButton();
         RightPanel = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        ScrollPane = new javax.swing.JScrollPane();
         TextPane = new javax.swing.JTextPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        TopPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ανάλυση Λογοτεχνικών Κειμένων", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
+        TopPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ανάλυση Λογοτεχνικών Κειμένων", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
 
         InputTextButton.setBackground(new java.awt.Color(255, 0, 51));
         InputTextButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -67,17 +69,34 @@ public class LiteratureAnalyticsUI extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        LeftPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Επιλογή Ανάλυσης", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
+
         CharacterAnalysisButton.setBackground(new java.awt.Color(255, 255, 0));
         CharacterAnalysisButton.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         CharacterAnalysisButton.setText("Ανάλυση Χαρακτήρων");
+        CharacterAnalysisButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CharacterAnalysisButtonActionPerformed(evt);
+            }
+        });
 
         WordAnalysisButton.setBackground(new java.awt.Color(102, 255, 51));
         WordAnalysisButton.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         WordAnalysisButton.setText("Ανάλυση Λέξεων");
+        WordAnalysisButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                WordAnalysisButtonActionPerformed(evt);
+            }
+        });
 
         SentenceAnalysisButton.setBackground(new java.awt.Color(51, 153, 255));
         SentenceAnalysisButton.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         SentenceAnalysisButton.setText("Ανάλυση Προτάσεων");
+        SentenceAnalysisButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SentenceAnalysisButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout LeftPanelLayout = new javax.swing.GroupLayout(LeftPanel);
         LeftPanel.setLayout(LeftPanelLayout);
@@ -90,26 +109,27 @@ public class LiteratureAnalyticsUI extends javax.swing.JFrame {
         LeftPanelLayout.setVerticalGroup(
             LeftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(LeftPanelLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(43, 43, 43)
                 .addComponent(CharacterAnalysisButton)
-                .addGap(36, 36, 36)
+                .addGap(43, 43, 43)
                 .addComponent(WordAnalysisButton)
-                .addGap(37, 37, 37)
+                .addGap(43, 43, 43)
                 .addComponent(SentenceAnalysisButton)
-                .addContainerGap(155, Short.MAX_VALUE))
+                .addContainerGap(82, Short.MAX_VALUE))
         );
 
-        jScrollPane1.setViewportView(TextPane);
+        TextPane.setEditable(false);
+        ScrollPane.setViewportView(TextPane);
 
         javax.swing.GroupLayout RightPanelLayout = new javax.swing.GroupLayout(RightPanel);
         RightPanel.setLayout(RightPanelLayout);
         RightPanelLayout.setHorizontalGroup(
             RightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
+            .addComponent(ScrollPane)
         );
         RightPanelLayout.setVerticalGroup(
             RightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
+            .addComponent(ScrollPane)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -119,7 +139,7 @@ public class LiteratureAnalyticsUI extends javax.swing.JFrame {
             .addComponent(TopPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(LeftPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(LeftPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(RightPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -129,7 +149,7 @@ public class LiteratureAnalyticsUI extends javax.swing.JFrame {
                 .addComponent(TopPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(LeftPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(LeftPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(RightPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
@@ -177,6 +197,8 @@ public class LiteratureAnalyticsUI extends javax.swing.JFrame {
             processedText = processedText.replaceAll("<[^>]*>", "");
             //Remove the &nbsp; characters
             processedText = processedText.replaceAll("&nbsp;", "");
+            //Remove the &amp; characters
+            processedText = processedText.replaceAll("&amp;", "");
             //Remove blank lines
             processedText = processedText.trim();
 
@@ -185,6 +207,68 @@ public class LiteratureAnalyticsUI extends javax.swing.JFrame {
             //JOptionPane.showMessageDialog(null, e);
         }
     }//GEN-LAST:event_InputTextButtonActionPerformed
+
+    private void CharacterAnalysisButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CharacterAnalysisButtonActionPerformed
+        //Set Title of Infobox
+        String titlebar = "Ανάλυση Χαρακτήρων";
+        //Get the text from TextPane
+        String characters = TextPane.getText();
+
+        if (TextPane.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Το κείμενο είναι άδειο!", "ERROR", JOptionPane.ERROR_MESSAGE);
+        } else {
+            //Create a new CharacterAnalysis Object
+            CharacterAnalysis charAnalysis = new CharacterAnalysis();
+            //Call the proper CharacterAnalysis methods
+            charAnalysis.setText(characters);
+            charAnalysis.Analysis();
+
+            //Show results
+            JOptionPane.showMessageDialog(null, "Ο συνολικός αριθμός Χαρακτήρων του κειμένου είναι: \n"
+                    + characters.length(), titlebar, JOptionPane.INFORMATION_MESSAGE);
+
+            JOptionPane.showMessageDialog(null, "Κατηγορίες Χαρακτήρων: \n \n"
+                    + Arrays.toString(charAnalysis.displayAnalysis()), titlebar, JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_CharacterAnalysisButtonActionPerformed
+
+    private void WordAnalysisButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_WordAnalysisButtonActionPerformed
+        //Set Title of Infobox
+        String titlebar = "Ανάλυση Λέξεων";
+        //Get the text from TextPane
+        String words = TextPane.getText();
+
+        if (TextPane.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Το κείμενο είναι άδειο!", "ERROR", JOptionPane.ERROR_MESSAGE);
+        } else {
+            //Create a new WordAnalysis Object
+            WordAnalysis wordAnalysis = new WordAnalysis();
+            //Call the proper WordAnalysis methods
+            wordAnalysis.setText(words);
+            wordAnalysis.SplitWords();
+            wordAnalysis.WordRateAnalysis();
+
+            //Show results
+            JOptionPane.showMessageDialog(null, "Οι συνολικός αριθμός Λέξεων του κειμένου είναι: \n"
+                    + wordAnalysis.SplitWords().length, titlebar, JOptionPane.INFORMATION_MESSAGE);
+
+            JOptionPane.showMessageDialog(null, "Οι Λέξεις του κειμένου είναι: \n"
+                    + Arrays.toString(wordAnalysis.SplitWords()), titlebar, JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_WordAnalysisButtonActionPerformed
+
+    private void SentenceAnalysisButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SentenceAnalysisButtonActionPerformed
+        //Set Title of Infobox
+        String titlebar = "Ανάλυση Προτάσεων";
+        //Get the text from TextPane
+        String sentences = TextPane.getText();
+
+        if (TextPane.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Το κείμενο είναι άδειο!", "ERROR", JOptionPane.ERROR_MESSAGE);
+        } else {
+
+        }
+    }//GEN-LAST:event_SentenceAnalysisButtonActionPerformed
 
     public static void main(String args[]) throws IOException {
 
@@ -198,16 +282,21 @@ public class LiteratureAnalyticsUI extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LiteratureAnalyticsUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LiteratureAnalyticsUI.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LiteratureAnalyticsUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LiteratureAnalyticsUI.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LiteratureAnalyticsUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LiteratureAnalyticsUI.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LiteratureAnalyticsUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LiteratureAnalyticsUI.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -224,10 +313,10 @@ public class LiteratureAnalyticsUI extends javax.swing.JFrame {
     private javax.swing.JButton InputTextButton;
     private javax.swing.JPanel LeftPanel;
     private javax.swing.JPanel RightPanel;
+    private javax.swing.JScrollPane ScrollPane;
     private javax.swing.JButton SentenceAnalysisButton;
     private javax.swing.JTextPane TextPane;
     private javax.swing.JPanel TopPanel;
     private javax.swing.JButton WordAnalysisButton;
-    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

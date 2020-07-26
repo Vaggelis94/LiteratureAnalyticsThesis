@@ -26,7 +26,7 @@
           <Component id="TopPanel" max="32767" attributes="0"/>
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="LeftPanel" min="-2" max="-2" attributes="0"/>
+              <Component id="LeftPanel" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="RightPanel" max="32767" attributes="0"/>
           </Group>
@@ -38,7 +38,7 @@
               <Component id="TopPanel" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="LeftPanel" max="32767" attributes="0"/>
+                  <Component id="LeftPanel" max="-2" attributes="0"/>
                   <Component id="RightPanel" max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -51,7 +51,7 @@
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
             <TitledBorder justification="2" title="&#x391;&#x3bd;&#x3ac;&#x3bb;&#x3c5;&#x3c3;&#x3b7; &#x39b;&#x3bf;&#x3b3;&#x3bf;&#x3c4;&#x3b5;&#x3c7;&#x3bd;&#x3b9;&#x3ba;&#x3ce;&#x3bd; &#x39a;&#x3b5;&#x3b9;&#x3bc;&#x3ad;&#x3bd;&#x3c9;&#x3bd;">
-              <Font PropertyName="font" name="Tahoma" size="11" style="1"/>
+              <Font PropertyName="font" name="Tahoma" size="14" style="1"/>
             </TitledBorder>
           </Border>
         </Property>
@@ -94,6 +94,15 @@
       </SubComponents>
     </Container>
     <Container class="javax.swing.JPanel" name="LeftPanel">
+      <Properties>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+            <TitledBorder justification="2" position="1" title="&#x395;&#x3c0;&#x3b9;&#x3bb;&#x3bf;&#x3b3;&#x3ae; &#x391;&#x3bd;&#x3ac;&#x3bb;&#x3c5;&#x3c3;&#x3b7;&#x3c2;">
+              <Font PropertyName="font" name="Tahoma" size="12" style="1"/>
+            </TitledBorder>
+          </Border>
+        </Property>
+      </Properties>
 
       <Layout>
         <DimensionLayout dim="0">
@@ -106,13 +115,13 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
                   <Component id="CharacterAnalysisButton" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
                   <Component id="WordAnalysisButton" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
                   <Component id="SentenceAnalysisButton" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="155" max="32767" attributes="0"/>
+                  <EmptySpace pref="82" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -128,6 +137,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="&#x391;&#x3bd;&#x3ac;&#x3bb;&#x3c5;&#x3c3;&#x3b7; &#x3a7;&#x3b1;&#x3c1;&#x3b1;&#x3ba;&#x3c4;&#x3ae;&#x3c1;&#x3c9;&#x3bd;"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CharacterAnalysisButtonActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="WordAnalysisButton">
           <Properties>
@@ -139,6 +151,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="&#x391;&#x3bd;&#x3ac;&#x3bb;&#x3c5;&#x3c3;&#x3b7; &#x39b;&#x3ad;&#x3be;&#x3b5;&#x3c9;&#x3bd;"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="WordAnalysisButtonActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="SentenceAnalysisButton">
           <Properties>
@@ -150,6 +165,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="&#x391;&#x3bd;&#x3ac;&#x3bb;&#x3c5;&#x3c3;&#x3b7; &#x3a0;&#x3c1;&#x3bf;&#x3c4;&#x3ac;&#x3c3;&#x3b5;&#x3c9;&#x3bd;"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SentenceAnalysisButtonActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -158,17 +176,17 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
+              <Component id="ScrollPane" alignment="0" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
+              <Component id="ScrollPane" alignment="0" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+        <Container class="javax.swing.JScrollPane" name="ScrollPane">
           <AuxValues>
             <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
           </AuxValues>
@@ -176,6 +194,9 @@
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
             <Component class="javax.swing.JTextPane" name="TextPane">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>
