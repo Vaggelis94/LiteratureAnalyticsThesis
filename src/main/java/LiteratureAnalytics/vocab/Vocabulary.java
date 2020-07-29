@@ -52,8 +52,7 @@ public class Vocabulary {
 
     private void makeSentences() {
         sentenceCount.clear();
-        String sentenceText = text.trim();
-        String sentences[] = sentenceText.split("[\\.·!():?;—-]");
+        String[] sentences = text.trim().split("[.·!:?;]");
         for (String sentence : sentences) {
             sentenceCount.put(sentence, sentenceCount.getOrDefault(sentence, 0) + 1);
         }

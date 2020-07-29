@@ -8,7 +8,7 @@ import java.util.Map;
 public class SentenceAnalysis {
 
     private Vocabulary vocab;
-    int count = 0;
+    private float count = 0;
 
     public SentenceAnalysis(Vocabulary vocab) {
         this.vocab = vocab;
@@ -16,7 +16,7 @@ public class SentenceAnalysis {
 
     @Override
     public String toString() {
-        return "Ο συνολικός αριθμός Προτάσεων του κειμένου είναι: \n" + count
+        return "Ο συνολικός αριθμός Προτάσεων του κειμένου είναι: \n" + (int) count
                 + "\n Προτάσεις: \n" + vocab.getSentenceCount();
     }
 
@@ -24,10 +24,7 @@ public class SentenceAnalysis {
 
         HashMap<String, Integer> map = vocab.getSentenceCount();
 
-        for (Map.Entry<String, Integer> entry : map.entrySet()) {
+        for (Map.Entry<String, Integer> entry : map.entrySet())
             count += entry.getValue();
-        }
-
     }
-
 }

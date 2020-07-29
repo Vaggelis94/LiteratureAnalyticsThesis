@@ -8,7 +8,7 @@ import java.util.Map;
 public class WordAnalysis {
 
     private Vocabulary vocab;
-    int count = 0;
+    private float count = 0;
 
     public WordAnalysis(Vocabulary vocab) {
         this.vocab = vocab;
@@ -16,7 +16,7 @@ public class WordAnalysis {
 
     @Override
     public String toString() {
-        return "Ο συνολικός αριθμός Λέξεων του κειμένου είναι: \n" + count
+        return "Ο συνολικός αριθμός Λέξεων του κειμένου είναι: \n" + (int) count
                 + "\n Λέξεις: \n" + vocab.getWordCount();
     }
 
@@ -24,11 +24,7 @@ public class WordAnalysis {
 
         HashMap<String, Integer> map = vocab.getWordCount();
 
-        for (Map.Entry<String, Integer> entry : map.entrySet()) {
+        for (Map.Entry<String, Integer> entry : map.entrySet())
             count += entry.getValue();
-        }
-
-        //vocab.getWordCount();
     }
-
 }
