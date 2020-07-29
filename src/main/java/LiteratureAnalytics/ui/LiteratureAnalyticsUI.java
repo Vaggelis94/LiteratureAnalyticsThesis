@@ -2,14 +2,15 @@ package LiteratureAnalytics.ui;
 
 import LiteratureAnalytics.utility.CharacterAnalysis;
 import LiteratureAnalytics.utility.WordAnalysis;
+import LiteratureAnalytics.utility.SentenceAnalysis;
 import LiteratureAnalytics.vocab.Vocabulary;
+import java.awt.Dimension;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
 
 public class LiteratureAnalyticsUI extends javax.swing.JFrame {
 
@@ -157,7 +158,7 @@ public class LiteratureAnalyticsUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void InputTextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InputTextButtonActionPerformed
+    private void InputTextButtonActionPerformed(java.awt.event.ActionEvent evt) {
 
         // File loading
         JFileChooser chooser = new JFileChooser();
@@ -203,7 +204,7 @@ public class LiteratureAnalyticsUI extends javax.swing.JFrame {
         return processedText;
     }
 
-    private void CharacterAnalysisButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CharacterAnalysisButtonActionPerformed
+    private void CharacterAnalysisButtonActionPerformed(java.awt.event.ActionEvent evt) {
         String messageTitle = "Ανάλυση Χαρακτήρων";
         String text = TextPane.getText();
 
@@ -213,15 +214,11 @@ public class LiteratureAnalyticsUI extends javax.swing.JFrame {
             CharacterAnalysis charAnalysis = new CharacterAnalysis(vocab);
             charAnalysis.analysis();
 
-            JOptionPane.showMessageDialog(null, "Ο συνολικός αριθμός Χαρακτήρων του κειμένου είναι: \n"
-                    + text.length(), messageTitle, JOptionPane.INFORMATION_MESSAGE);
-
-            JOptionPane.showMessageDialog(null, "Κατηγορίες Χαρακτήρων: \n \n"
-                    + charAnalysis, messageTitle, JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, charAnalysis, messageTitle, JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
-    private void WordAnalysisButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_WordAnalysisButtonActionPerformed
+    private void WordAnalysisButtonActionPerformed(java.awt.event.ActionEvent evt) {
         String messageTitle = "Ανάλυση Λέξεων";
 
         if (TextPane.getText().isEmpty()) {
@@ -230,22 +227,33 @@ public class LiteratureAnalyticsUI extends javax.swing.JFrame {
             WordAnalysis wordAnalysis = new WordAnalysis(vocab);
             wordAnalysis.analysis();
 
-            JOptionPane.showMessageDialog(null, "Οι συνολικός αριθμός Λέξεων του κειμένου είναι: \n"
-                    + wordAnalysis, messageTitle, JOptionPane.INFORMATION_MESSAGE);
-
-            JOptionPane.showMessageDialog(null, "Οι Λέξεις του κειμένου είναι: \n"
-                    + wordAnalysis, messageTitle, JOptionPane.INFORMATION_MESSAGE);
+            JTextArea area = new JTextArea();
+            JScrollPane scrollPane = new JScrollPane(area);
+            area.setText(wordAnalysis.toString());
+            area.setLineWrap(true);
+            area.setWrapStyleWord(true);
+            scrollPane.setPreferredSize(new Dimension(500, 500));
+            JOptionPane.showMessageDialog(null, scrollPane, messageTitle, JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
-    private void SentenceAnalysisButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SentenceAnalysisButtonActionPerformed
+    private void SentenceAnalysisButtonActionPerformed(java.awt.event.ActionEvent evt) {
         String messageTitle = "Ανάλυση Προτάσεων";
         String text = TextPane.getText();
 
         if (TextPane.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Το κείμενο είναι άδειο!", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
         } else {
+            SentenceAnalysis sentenceAnalysis = new SentenceAnalysis(vocab);
+            sentenceAnalysis.analysis();
 
+            JTextArea area = new JTextArea();
+            JScrollPane scrollPane = new JScrollPane(area);
+            area.setText(sentenceAnalysis.toString());
+            area.setLineWrap(true);
+            area.setWrapStyleWord(true);
+            scrollPane.setPreferredSize(new Dimension(500, 500));
+            JOptionPane.showMessageDialog(null, scrollPane, messageTitle, JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
