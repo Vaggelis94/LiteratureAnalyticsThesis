@@ -210,12 +210,12 @@ public class LiteratureAnalyticsUI extends javax.swing.JFrame {
 
         if (TextPane.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Το κείμενο είναι άδειο!", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
-        } else {
+        }/* else {
             CharacterAnalysis charAnalysis = new CharacterAnalysis(vocab);
             charAnalysis.analysis();
 
             JOptionPane.showMessageDialog(null, charAnalysis, messageTitle, JOptionPane.INFORMATION_MESSAGE);
-        }
+        }*/
     }
 
     private void WordAnalysisButtonActionPerformed(java.awt.event.ActionEvent evt) {
