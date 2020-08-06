@@ -2,13 +2,7 @@ package LiteratureAnalytics.ui;
 
 import LiteratureAnalytics.vocab.Vocabulary;
 import LiteratureAnalytics.browser.Browser;
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 
-import javax.swing.*;
-import java.io.File;
 import java.io.IOException;
 
 public class LiteratureAnalyticsUI extends javax.swing.JFrame {
@@ -35,8 +29,7 @@ public class LiteratureAnalyticsUI extends javax.swing.JFrame {
         InputTextButton = new javax.swing.JButton();
         LeftPanel = new javax.swing.JPanel();
         RightPanel = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jEditorPane1 = new javax.swing.JEditorPane();
+        browser1 = new LiteratureAnalytics.browser.Browser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -80,17 +73,21 @@ public class LiteratureAnalyticsUI extends javax.swing.JFrame {
             .addGap(0, 280, Short.MAX_VALUE)
         );
 
-        jScrollPane1.setViewportView(jEditorPane1);
-
         javax.swing.GroupLayout RightPanelLayout = new javax.swing.GroupLayout(RightPanel);
         RightPanel.setLayout(RightPanelLayout);
         RightPanelLayout.setHorizontalGroup(
             RightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
+            .addGroup(RightPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(browser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         RightPanelLayout.setVerticalGroup(
             RightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
+            .addGroup(RightPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(browser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -123,17 +120,6 @@ public class LiteratureAnalyticsUI extends javax.swing.JFrame {
         //JFileChooser chooser = new JFileChooser();
         //chooser.showOpenDialog(null);
         //File myFile = chooser.getSelectedFile();
-        Browser myBrowser = new Browser();
-
-        //RightPanel.add(myBrowser, BorderLayout.CENTER);
-        RightPanel.add(myBrowser);
-        
-        //j.getContentPane().add(scrollPane, BorderLayout.CENTER);
-
-
-        // display the frame
-        //RightPanel.setSize(new Dimension(600, 500));  
-        RightPanel.setVisible(true);
         
         /*
             // TODO: Replace with regular parsing, there is no apparent need for JSoup
@@ -218,7 +204,6 @@ public class LiteratureAnalyticsUI extends javax.swing.JFrame {
     private javax.swing.JPanel LeftPanel;
     private javax.swing.JPanel RightPanel;
     private javax.swing.JPanel TopPanel;
-    private javax.swing.JEditorPane jEditorPane1;
-    private javax.swing.JScrollPane jScrollPane1;
+    private LiteratureAnalytics.browser.Browser browser1;
     // End of variables declaration//GEN-END:variables
 }
