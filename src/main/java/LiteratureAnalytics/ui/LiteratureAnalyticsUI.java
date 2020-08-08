@@ -1,8 +1,12 @@
 package LiteratureAnalytics.ui;
 
 import LiteratureAnalytics.vocab.Vocabulary;
-import LiteratureAnalytics.browser.Browser;
+import org.jsoup.Jsoup;
 
+import javax.swing.*;
+import javax.swing.text.Document;
+import javax.swing.text.html.HTMLEditorKit;
+import java.io.File;
 import java.io.IOException;
 
 public class LiteratureAnalyticsUI extends javax.swing.JFrame {
@@ -25,90 +29,94 @@ public class LiteratureAnalyticsUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        TopPanel = new javax.swing.JPanel();
-        InputTextButton = new javax.swing.JButton();
-        LeftPanel = new javax.swing.JPanel();
-        RightPanel = new javax.swing.JPanel();
-        browser1 = new LiteratureAnalytics.browser.Browser();
+        topPanel = new javax.swing.JPanel();
+        inputTextButton = new javax.swing.JButton();
+        leftPanel = new javax.swing.JPanel();
+        rightPanel = new javax.swing.JPanel();
+        htmlScrollPane = new javax.swing.JScrollPane();
+        htmlEditorPane = new javax.swing.JEditorPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        TopPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ανάλυση Λογοτεχνικών Κειμένων", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
+        topPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ανάλυση Λογοτεχνικών Κειμένων", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
 
-        InputTextButton.setBackground(new java.awt.Color(255, 0, 51));
-        InputTextButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        InputTextButton.setText("Εισαγωγή Κειμένου");
-        InputTextButton.addActionListener(new java.awt.event.ActionListener() {
+        inputTextButton.setBackground(new java.awt.Color(255, 0, 51));
+        inputTextButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        inputTextButton.setText("Εισαγωγή Κειμένου");
+        inputTextButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 InputTextButtonActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout TopPanelLayout = new javax.swing.GroupLayout(TopPanel);
-        TopPanel.setLayout(TopPanelLayout);
+        javax.swing.GroupLayout TopPanelLayout = new javax.swing.GroupLayout(topPanel);
+        topPanel.setLayout(TopPanelLayout);
         TopPanelLayout.setHorizontalGroup(
-            TopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(TopPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(InputTextButton)
-                .addContainerGap(428, Short.MAX_VALUE))
+                TopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(TopPanelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(inputTextButton)
+                                .addContainerGap(428, Short.MAX_VALUE))
         );
         TopPanelLayout.setVerticalGroup(
-            TopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TopPanelLayout.createSequentialGroup()
-                .addComponent(InputTextButton, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
-                .addContainerGap())
+                TopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TopPanelLayout.createSequentialGroup()
+                                .addComponent(inputTextButton, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                                .addContainerGap())
         );
 
-        LeftPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Επιλογή Ανάλυσης", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
+        leftPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Επιλογή Ανάλυσης", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
 
-        javax.swing.GroupLayout LeftPanelLayout = new javax.swing.GroupLayout(LeftPanel);
-        LeftPanel.setLayout(LeftPanelLayout);
+        javax.swing.GroupLayout LeftPanelLayout = new javax.swing.GroupLayout(leftPanel);
+        leftPanel.setLayout(LeftPanelLayout);
         LeftPanelLayout.setHorizontalGroup(
-            LeftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 157, Short.MAX_VALUE)
+                LeftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 157, Short.MAX_VALUE)
         );
         LeftPanelLayout.setVerticalGroup(
-            LeftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 280, Short.MAX_VALUE)
+                LeftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 280, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout RightPanelLayout = new javax.swing.GroupLayout(RightPanel);
-        RightPanel.setLayout(RightPanelLayout);
+        htmlEditorPane.setEditable(false);
+        htmlScrollPane.setViewportView(htmlEditorPane);
+
+        javax.swing.GroupLayout RightPanelLayout = new javax.swing.GroupLayout(rightPanel);
+        rightPanel.setLayout(RightPanelLayout);
         RightPanelLayout.setHorizontalGroup(
-            RightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(RightPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(browser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                RightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(RightPanelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(htmlScrollPane)
+                                .addContainerGap())
         );
         RightPanelLayout.setVerticalGroup(
-            RightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(RightPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(browser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                RightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(RightPanelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(htmlScrollPane)
+                                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(TopPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(LeftPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(RightPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(topPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(leftPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(rightPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(TopPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(LeftPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(RightPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addComponent(topPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(leftPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(rightPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         pack();
@@ -117,21 +125,32 @@ public class LiteratureAnalyticsUI extends javax.swing.JFrame {
     private void InputTextButtonActionPerformed(java.awt.event.ActionEvent evt) {
 
         // File loading
-        //JFileChooser chooser = new JFileChooser();
-        //chooser.showOpenDialog(null);
-        //File myFile = chooser.getSelectedFile();
-        
-        /*
-            // TODO: Replace with regular parsing, there is no apparent need for JSoup
-            Document doc = Jsoup.parse(myFile, "UTF-8", " ");
+        JFileChooser chooser = new JFileChooser();
+        chooser.showOpenDialog(null);
+        File myFile = chooser.getSelectedFile();
 
-            String documentText = parseDocument(doc.html());
-            TextPane.setText(documentText);
-            vocab = new Vocabulary(documentText);
+        HTMLEditorKit kit = new HTMLEditorKit();
+        htmlEditorPane.setEditorKit(kit);
+        Document doc = kit.createDefaultDocument();
+
+        htmlEditorPane.setDocument(doc);
+        try {
+            htmlEditorPane.setText(Jsoup.parse(myFile, "UTF-8", " ").html());
         } catch (IOException e) {
-            //JOptionPane.showMessageDialog(null, e);
+            e.printStackTrace();
         }
-         */
+
+//        try {
+//            // TODO: Replace with regular parsing, there is no apparent need for JSoup
+//            Document doc = Jsoup.parse(myFile, "UTF-8", " ");
+//
+//            String documentText = parseDocument(doc.html());
+//            TextPane.setText(documentText);
+//            vocab = new Vocabulary(documentText);
+//        } catch (IOException e) {
+//            //JOptionPane.showMessageDialog(null, e);
+//        }
+
     }
 
     private String parseDocument(String text) {
@@ -200,10 +219,11 @@ public class LiteratureAnalyticsUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton InputTextButton;
-    private javax.swing.JPanel LeftPanel;
-    private javax.swing.JPanel RightPanel;
-    private javax.swing.JPanel TopPanel;
-    private LiteratureAnalytics.browser.Browser browser1;
+    private javax.swing.JButton inputTextButton;
+    private javax.swing.JPanel leftPanel;
+    private javax.swing.JPanel rightPanel;
+    private javax.swing.JPanel topPanel;
+    private javax.swing.JEditorPane htmlEditorPane;
+    private javax.swing.JScrollPane htmlScrollPane;
     // End of variables declaration//GEN-END:variables
 }
