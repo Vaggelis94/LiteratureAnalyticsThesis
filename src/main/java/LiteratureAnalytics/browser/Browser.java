@@ -5,7 +5,7 @@ import javax.swing.text.Document;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 
-public class Browser extends JScrollPane {
+public class Browser extends JEditorPane {
 
     public static void main(String[] args) {
         new Browser();
@@ -19,9 +19,9 @@ public class Browser extends JScrollPane {
         JEditorPane editorPane = new JEditorPane();
 
         // make it read-only
-        editorPane.setEditable(false);
+        editorPane.setEditable(true);
 
-        setViewportView(editorPane);
+        //setViewportView(editorPane);
 
         // add an html editor kit
         HTMLEditorKit kit = new HTMLEditorKit();
@@ -48,8 +48,8 @@ public class Browser extends JScrollPane {
         editorPane.setDocument(doc);
         editorPane.setText(htmlString);
         editorPane.setVisible(true);
-        setVisible(true);
+        //setVisible(true);
 
     }
-
+    
 }
