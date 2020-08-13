@@ -143,6 +143,8 @@ public class LiteratureAnalyticsUI extends javax.swing.JFrame {
         String processedText = text;
         // Remove <meta> tags
         processedText = processedText.replaceAll("<meta([\\s\\S]+?)>", "");
+        // Replace unknown characters (end/start of guarded area) with two dashes
+        processedText = processedText.replaceAll("�", "--");
 
         return processedText;
     }
