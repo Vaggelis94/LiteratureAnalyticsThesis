@@ -8,6 +8,8 @@ import javax.swing.text.Document;
 import javax.swing.text.html.HTMLEditorKit;
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.xml.parsers.*;
 import javax.xml.transform.*;
@@ -125,7 +127,7 @@ public class LiteratureAnalyticsUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void InputTextButtonActionPerformed(java.awt.event.ActionEvent evt) throws Exception {
+    private void InputTextButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // File loading
         JFileChooser chooser = new JFileChooser();
         chooser.showOpenDialog(null);
@@ -145,77 +147,81 @@ public class LiteratureAnalyticsUI extends javax.swing.JFrame {
             e.printStackTrace();
         }
 
-        DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
-        org.w3c.dom.Document document = documentBuilder.newDocument();
-        
-        //Create Root
-        Element rootElement = document.createElement("Play");
-        document.appendChild(rootElement);
-        
-        Element startPlay = document.createElement("Start of Play");
-        startPlay.appendChild(document.createTextNode("data"));
-        rootElement.appendChild(startPlay);
-        
-        Element title = document.createElement("Title");
-        title.appendChild(document.createTextNode("data"));
-        rootElement.appendChild(title);
-        
-        Element author = document.createElement("Author");
-        author.appendChild(document.createTextNode("data"));
-        rootElement.appendChild(author);
-        
-        Element contents = document.createElement("Contents");
-        contents.appendChild(document.createTextNode("data"));
-        rootElement.appendChild(contents);
-        
-        Element introduction = document.createElement("Introduction");
-        Element preamble = document.createElement("Preamble");
-        preamble.appendChild(document.createTextNode("data"));
-        Element preambleSnippets = document.createElement("Preamble Snippets");
-        preambleSnippets.appendChild(document.createTextNode("data"));
-        Element preambleFootnotes = document.createElement("Preamble Footnotes");
-        preambleFootnotes.appendChild(document.createTextNode("data"));
-        introduction.appendChild(preamble);
-        introduction.appendChild(preambleSnippets);
-        introduction.appendChild(preambleFootnotes);
-        rootElement.appendChild(introduction);
-        
-        Element actualPlay = document.createElement("Actual Play");
-        Element playIntro = document.createElement("Intro of Play");
-        playIntro.appendChild(document.createTextNode("data"));
-        Element characters = document.createElement("Characters");
-        characters.appendChild(document.createTextNode("data"));
-        Element act1 = document.createElement("Act 1");
-        Element act1Snippets = document.createElement("Act 1 Snippets");
-        act1Snippets.appendChild(document.createTextNode("data"));
-        Element act1Dialogue = document.createElement("Act 1 Dialogue");
-        act1Dialogue.appendChild(document.createTextNode("data"));
-        act1.appendChild(act1Snippets);
-        act1.appendChild(act1Dialogue);
-        Element act2 = document.createElement("Act 2");
-        Element act2Snippets = document.createElement("Act 2 Snippets");
-        act2Snippets.appendChild(document.createTextNode("data"));
-        Element act2Dialogue = document.createElement("Act 2 Dialogue");
-        act2Dialogue.appendChild(document.createTextNode("data"));
-        act2.appendChild(act2Snippets);
-        act2.appendChild(act2Dialogue);
-        Element act3 = document.createElement("Act 3");
-        Element act3Snippets = document.createElement("Act 3 Snippets");
-        act3Snippets.appendChild(document.createTextNode("data"));
-        Element act3Dialogue = document.createElement("Act 3 Dialogue");
-        act3Dialogue.appendChild(document.createTextNode("data"));
-        act3.appendChild(act3Snippets);
-        act3.appendChild(act3Dialogue);
-        actualPlay.appendChild(playIntro);
-        actualPlay.appendChild(characters);
-        actualPlay.appendChild(act1);
-        actualPlay.appendChild(act2);
-        actualPlay.appendChild(act3);
-        
-        Element endPlay = document.createElement("End of Play");
-        endPlay.appendChild(document.createTextNode("data"));
-        rootElement.appendChild(endPlay);
+        try {
+            DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
+            org.w3c.dom.Document document = documentBuilder.newDocument();
+
+            //Create Root
+            Element rootElement = document.createElement("Play");
+            document.appendChild(rootElement);
+
+            Element startPlay = document.createElement("StartofPlay");
+            startPlay.appendChild(document.createTextNode("data"));
+            rootElement.appendChild(startPlay);
+
+            Element title = document.createElement("Title");
+            title.appendChild(document.createTextNode("data"));
+            rootElement.appendChild(title);
+
+            Element author = document.createElement("Author");
+            author.appendChild(document.createTextNode("data"));
+            rootElement.appendChild(author);
+
+            Element contents = document.createElement("Contents");
+            contents.appendChild(document.createTextNode("data"));
+            rootElement.appendChild(contents);
+
+            Element introduction = document.createElement("Introduction");
+            Element preamble = document.createElement("Preamble");
+            preamble.appendChild(document.createTextNode("data"));
+            Element preambleSnippets = document.createElement("PreambleSnippets");
+            preambleSnippets.appendChild(document.createTextNode("data"));
+            Element preambleFootnotes = document.createElement("PreambleFootnotes");
+            preambleFootnotes.appendChild(document.createTextNode("data"));
+            introduction.appendChild(preamble);
+            introduction.appendChild(preambleSnippets);
+            introduction.appendChild(preambleFootnotes);
+            rootElement.appendChild(introduction);
+
+            Element actualPlay = document.createElement("ActualPlay");
+            Element playIntro = document.createElement("IntroofPlay");
+            playIntro.appendChild(document.createTextNode("data"));
+            Element characters = document.createElement("Characters");
+            characters.appendChild(document.createTextNode("data"));
+            Element act1 = document.createElement("Act1");
+            Element act1Snippets = document.createElement("Act1Snippets");
+            act1Snippets.appendChild(document.createTextNode("data"));
+            Element act1Dialogue = document.createElement("Act1Dialogue");
+            act1Dialogue.appendChild(document.createTextNode("data"));
+            act1.appendChild(act1Snippets);
+            act1.appendChild(act1Dialogue);
+            Element act2 = document.createElement("Act2");
+            Element act2Snippets = document.createElement("Act2Snippets");
+            act2Snippets.appendChild(document.createTextNode("data"));
+            Element act2Dialogue = document.createElement("Act2Dialogue");
+            act2Dialogue.appendChild(document.createTextNode("data"));
+            act2.appendChild(act2Snippets);
+            act2.appendChild(act2Dialogue);
+            Element act3 = document.createElement("Act3");
+            Element act3Snippets = document.createElement("Act3Snippets");
+            act3Snippets.appendChild(document.createTextNode("data"));
+            Element act3Dialogue = document.createElement("Act3Dialogue");
+            act3Dialogue.appendChild(document.createTextNode("data"));
+            act3.appendChild(act3Snippets);
+            act3.appendChild(act3Dialogue);
+            actualPlay.appendChild(playIntro);
+            actualPlay.appendChild(characters);
+            actualPlay.appendChild(act1);
+            actualPlay.appendChild(act2);
+            actualPlay.appendChild(act3);
+
+            Element endPlay = document.createElement("EndofPlay");
+            endPlay.appendChild(document.createTextNode("data"));
+            rootElement.appendChild(endPlay);
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        }
 
     }
 
